@@ -1,19 +1,35 @@
-import React from "react";
-
-const items = [
-    {
-        id: 1,
-        name: "Bugatti",
-        price: 1000000,
-        description: "Bugatti Veyron",
-        image: "",
-    },
-];
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Item from "../Item/Item";
 
 const Items = () => {
+    const [items, setItems] = useState([]);
+    const location = useLocation();
+
+    useEffect(() => {
+        fetch("items.json")
+            .then((res) => res.json())
+            .then((data) => setItems(data));
+    }, []);
+
     return (
-        <div>
-            <h2>Featured Items</h2>
+        <div className="container home-products text-center p-3 p-lg-5 mx-lg-auto">
+            <h2 className="fw-bold">
+                FEATURED <span className="text-warning">ITEMS</span>
+            </h2>
+
+            <div className="row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5">
+                {items.map((item) => (
+                    <Item key={item.id} item={item}>
+                        <Link to={`/inventory/${item.id}`}>
+                            <button className="btn btn-book">
+                                Manage &nbsp;
+                                <i className="fas fa-cart-plus"></i>
+                            </button>
+                        </Link>
+                    </Item>
+                ))}
+            </div>
         </div>
     );
 };

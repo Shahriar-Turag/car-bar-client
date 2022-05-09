@@ -1,0 +1,5 @@
+.items-container {
+    display: grid;
+    grid-template-columns: repeast(3, 1fr);
+    grid-gap: 10px;
+}
