@@ -8,6 +8,7 @@ import "./Register.css";
 import auth from "../../../firebase.init";
 // import SocialLogin from "../SocialLogin/SocialLogin";
 import Loading from "../../Shared/Loading/Loading";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
     const [agree, setAgree] = useState(false);
@@ -95,7 +96,7 @@ const Register = () => {
                     Please Login
                 </Link>{" "}
             </p>
-            {/* <SocialLogin></SocialLogin> */}
+            <SocialLogin></SocialLogin>
         </div>
     );
 };
