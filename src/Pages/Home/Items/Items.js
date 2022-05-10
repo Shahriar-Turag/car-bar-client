@@ -7,7 +7,7 @@ const Items = () => {
     const location = useLocation();
 
     useEffect(() => {
-        fetch("items.json")
+        fetch("http://localhost:5000/item")
             .then((res) => res.json())
             .then((data) => setItems(data));
     }, []);
@@ -19,16 +19,27 @@ const Items = () => {
             </h2>
 
             <div className="row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5">
-                {items.map((item) => (
-                    <Item key={item.id} item={item}>
-                        <Link to={`/inventory/${item.id}`}>
-                            <button className="btn btn-book">
-                                Manage &nbsp;
-                                <i className="fas fa-cart-plus"></i>
-                            </button>
-                        </Link>
-                    </Item>
-                ))}
+                {location.pathname === "/"
+                    ? items.slice(0, 6).map((item) => (
+                          <Item key={item.id} item={item}>
+                              <Link to={`/inventory/${item.id}`}>
+                                  <button className="btn btn-book">
+                                      Manage &nbsp;
+                                      <i className="fas fa-cart-plus"></i>
+                                  </button>
+                              </Link>
+                          </Item>
+                      ))
+                    : items.map((item) => (
+                          <Item key={item.id} item={item}>
+                              <Link to={`/inventory/${item.id}`}>
+                                  <button className="btn btn-book">
+                                      Manage &nbsp;
+                                      <i className="fas fa-cart-plus"></i>
+                                  </button>
+                              </Link>
+                          </Item>
+                      ))}
             </div>
         </div>
     );

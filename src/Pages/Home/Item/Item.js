@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./Item.css";
 
 const Item = ({ item, children }) => {
@@ -13,10 +14,17 @@ const Item = ({ item, children }) => {
                     <p className="card-text description">
                         {description.slice(0, 50)}...
                     </p>
+
                     <h6 className="card-text text-secondary">
                         Price :{" "}
                         <span className="text-info fw-bold">${price}</span>{" "}
                     </h6>
+                    <p>
+                        <small>Quantity: {quantity}</small>
+                    </p>
+                    <p>
+                        <small>Supplier: {supplier}</small>
+                    </p>
                 </div>
                 {children}
             </div>
