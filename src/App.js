@@ -3,8 +3,11 @@ import "./App.css";
 import About from "./Pages/About/About";
 import AllItems from "./Pages/AllItems/AllItems";
 import Home from "./Pages/Home/Home/Home";
+import ItemDetails from "./Pages/Home/ItemDetails/ItemDetails";
+
 import Login from "./Pages/Login/Login/Login";
 import Register from "./Pages/Login/Register/Register";
+import RequireAuth from "./Pages/Login/RequireAuth/RequireAuth";
 import Footer from "./Pages/Shared/Footer/Footer";
 import Header from "./Pages/Shared/Header/Header";
 
@@ -18,7 +21,16 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/manage" element={<AllItems />} />
+                <Route path="/inventory" element={<AllItems />} />
+
+                <Route
+                    path="/item/:itemId"
+                    element={
+                        <RequireAuth>
+                            <ItemDetails />
+                        </RequireAuth>
+                    }
+                ></Route>
             </Routes>
             <Footer />
         </div>

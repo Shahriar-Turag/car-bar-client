@@ -21,8 +21,8 @@ const Items = () => {
             <div className="row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5">
                 {location.pathname === "/"
                     ? items.slice(0, 6).map((item) => (
-                          <Item key={item.id} item={item}>
-                              <Link to={`/inventory/${item.id}`}>
+                          <Item key={item._id} item={item}>
+                              <Link to={`/item/${item._id}`}>
                                   <button className="btn btn-book">
                                       Manage &nbsp;
                                       <i className="fas fa-cart-plus"></i>
@@ -31,8 +31,8 @@ const Items = () => {
                           </Item>
                       ))
                     : items.map((item) => (
-                          <Item key={item.id} item={item}>
-                              <Link to={`/inventory/${item.id}`}>
+                          <Item key={item._id} item={item}>
+                              <Link to={`/item/${item._id}`}>
                                   <button className="btn btn-book">
                                       Manage &nbsp;
                                       <i className="fas fa-cart-plus"></i>
