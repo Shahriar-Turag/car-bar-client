@@ -1,21 +1,72 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+// import useItemDetails from "../../hooks/useItemDetails";
 import "./ItemDetails.css";
 
 const ItemDetails = () => {
-    const [item, setItem] = useState({});
     const { itemId } = useParams();
+    const [item, setItem] = useState({});
     const [loading, setLoading] = useState(true);
+    const quantityRef = useRef(null);
 
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:5000/item/${itemId}`)
+        const url = `http://localhost:5000/item/${itemId}`;
+        fetch(url)
             .then((res) => res.json())
             .then((data) => {
                 setItem(data);
                 setLoading(false);
             });
-    }, [itemId]);
+    }, []);
+
+    const handleRestock = (quantity) => {
+        const updatedQuantity =
+            parseInt(quantity) + parseInt(quantityRef.current.value);
+
+        const newQuantity = { updatedQuantity };
+
+        fetch(`http://localhost:5000/item/${itemId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newQuantity),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.modifiedCount > 0) {
+                    const remaining = item.filter(
+                        (item) => item._id !== itemId
+                    );
+                    setItem(remaining);
+                    // item.quantity = updatedQuantity;
+                    toast("Restocked successfully", { type: "success" });
+                }
+            });
+    };
+
+    const handleDelivered = (quantity) => {
+        const updatedQuantity = parseInt(quantity) - 1;
+
+        const newQuantity = { updatedQuantity };
+
+        fetch(`http://localhost:5000/item/${itemId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newQuantity),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.modifiedCount > 0) {
+                    toast("Delivered successfully", { type: "success" });
+                }
+            });
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -63,6 +114,17 @@ const ItemDetails = () => {
                                     </span>
                                 </p>
                             </div>
+                            <input ref={quantityRef} type="number" min={0} />
+                            <button
+                                onClick={() => handleRestock(item.quantity)}
+                            >
+                                Restock
+                            </button>
+                            <button
+                                onClick={() => handleDelivered(item.quantity)}
+                            >
+                                Delivered
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,38 @@
+.item-details {
+    width: 75%;
+    margin: auto;
+    padding: 30px 40px;
+    border: 1px solid rgb(81, 81, 81);
+    border-radius: 5px;
+}
+
+.item-details img {
+    width: 150px;
+    height: 150px;
+}
+
+.item-details a {
+    text-decoration: none;
+}
+.item-details a:hover {
+    text-decoration: none;
+    color: rgb(179, 179, 179);
+}
+
+.text-detail {
+    color: rgb(179, 179, 179);
+}
+
+.item-detail-contact i {
+    color: #6bc0e2;
+}
+
+.title-detail {
+    color: rgb(230, 150, 47);
+}
+
+@media only screen and (max-width: 688px) {
+    .item-details {
+        width: 90%;
+    }
+}
