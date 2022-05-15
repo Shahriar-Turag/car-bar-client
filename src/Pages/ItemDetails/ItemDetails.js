@@ -95,11 +95,11 @@ const ItemDetails = () => {
                         <div className="item-detail-contact d-flex flex-wrap justify-content-between align-items-center">
                             <div>
                                 <p>
-                                    <i className="fas fa-envelope"></i> &nbsp;
+                                    <i className="fa-solid fa-badge-dollar"></i>
+                                    &nbsp;
                                     <span className="text-detail">{price}</span>
                                 </p>
                                 <p>
-                                    <i className="fas fa-phone"></i> &nbsp;
                                     <span className="text-detail">
                                         Quantity: {quantity}
                                     </span>
@@ -107,7 +107,7 @@ const ItemDetails = () => {
                             </div>
                             <div>
                                 <p>
-                                    <i className="fas fa-map-marker-alt"></i>{" "}
+                                    <i className="fa-solid fa-car-mirrors"></i>
                                     &nbsp;
                                     <span className="text-detail">
                                         Supplier: {supplier}

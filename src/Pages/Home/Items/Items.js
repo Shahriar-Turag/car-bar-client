@@ -31,7 +31,7 @@ const Items = () => {
     };
 
     return (
-        <div className="container home-products text-center p-3 p-lg-5 mx-lg-auto">
+        <div className="container  text-center p-3 p-lg-5 mx-lg-auto">
             <h2 className="fw-bold">
                 FEATURED <span className="text-warning">ITEMS</span>
             </h2>

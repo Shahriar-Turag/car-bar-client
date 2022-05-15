@@ -7,7 +7,7 @@ const Item = ({ item, children }) => {
 
     return (
         <div className="col">
-            <div className="card single-agent h-100 p-3 p-lg-4 rounded mx-lg-2">
+            <div className="card  h-100 p-3 p-lg-4 rounded mx-lg-2">
                 <img src={img} className="card-img-top rounded" alt="..." />
                 <div className="card-body pt-3 px-0">
                     <h5 className="card-title fw-bold">{name}</h5>
