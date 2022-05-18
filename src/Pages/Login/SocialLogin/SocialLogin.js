@@ -2,14 +2,17 @@ import React from "react";
 import google from "../../../images/google.png";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../Shared/Loading/Loading";
+import "./SocialLogin.css";
 
 const SocialLogin = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
     const navigate = useNavigate();
+    const location = useLocation();
 
+    let from = location.state?.from?.pathname || "/";
     let errorElement;
 
     if (loading) {
@@ -19,29 +22,32 @@ const SocialLogin = () => {
     if (error) {
         errorElement = <p className="text-danger">Error: {error?.message}</p>;
     }
-
     if (user) {
-        navigate("/home");
+        navigate(from, { replace: true });
     }
+
+    // if (user) {
+    //     navigate("/home");
+    // }
 
     return (
         <div>
             <div className="d-flex align-items-center">
                 <div
                     style={{ height: "1px" }}
-                    className="bg-primary w-50"
+                    className="bg-warning w-50"
                 ></div>
                 <p className="mt-2 px-2">or</p>
                 <div
                     style={{ height: "1px" }}
-                    className="bg-primary w-50"
+                    className="bg-warning w-50"
                 ></div>
             </div>
             {errorElement}
-            <div className="">
+            <div className="page">
                 <button
                     onClick={() => signInWithGoogle()}
-                    className="btn btn-info w-50 d-block mx-auto my-2"
+                    className="btn google  w-50 d-block mx-auto my-2"
                 >
                     <img style={{ width: "30px" }} src={google} alt="" />
                     <span className="px-2">Google Sign In</span>

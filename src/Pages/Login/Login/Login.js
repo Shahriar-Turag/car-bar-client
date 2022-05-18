@@ -10,6 +10,7 @@ import auth from "../../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import "./Login.css";
 
 const Login = () => {
     const emailRef = useRef("");
@@ -58,9 +59,9 @@ const Login = () => {
     };
 
     return (
-        <div className="container w-50 mx-auto">
+        <div className="container w-50">
             <PageTitle title="Login"></PageTitle>
-            <h2 className="text-primary text-center mt-2">Please Login</h2>
+            <h2 className=" fw-bold text-center mt-2">PLEASE LOGIN</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Control
@@ -79,7 +80,8 @@ const Login = () => {
                     />
                 </Form.Group>
                 <Button
-                    variant="primary w-50 mx-auto d-block mb-2"
+                    className="login"
+                    variant=" w-50 mx-auto d-block mb-2"
                     type="submit"
                 >
                     Login
@@ -87,10 +89,10 @@ const Login = () => {
             </Form>
             {errorElement}
             <p>
-                New to Genius Car?{" "}
+                New to CAR BAR?{" "}
                 <Link
                     to="/register"
-                    className="text-primary pe-auto text-decoration-none"
+                    className="text-warning pe-auto text-decoration-none"
                     onClick={navigateRegister}
                 >
                     Please Register
@@ -99,7 +101,7 @@ const Login = () => {
             <p>
                 Forget Password?{" "}
                 <button
-                    className="btn btn-link text-primary pe-auto text-decoration-none"
+                    className="btn btn-link text-warning pe-auto text-decoration-none"
                     onClick={resetPassword}
                 >
                     Reset Password

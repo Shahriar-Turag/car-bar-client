@@ -1,6 +1,8 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Item from "../Item/Item";
+import "./Items.css";
 
 const Items = () => {
     const [items, setItems] = useState([]);
@@ -36,14 +38,17 @@ const Items = () => {
                 FEATURED <span className="text-warning">ITEMS</span>
             </h2>
 
-            <div className="row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5">
-                {location.pathname === "/"
+            <div
+                className="row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5"
+                style={{ paddingBottom: "200px" }}
+            >
+                {location.pathname === "/" || location.pathname === "/home"
                     ? items.slice(0, 6).map((item) => (
                           <Item key={item._id} item={item}>
                               <Link to={`/item/${item._id}`}>
-                                  <button className="btn btn-book">
-                                      Manage &nbsp;
-                                      <i className="fas fa-cart-plus"></i>
+                                  <button className="btn btn-manage mx-auto">
+                                      Update &nbsp;
+                                      <i className="fas fa-angle-right"></i>
                                   </button>
                               </Link>
                           </Item>
@@ -53,17 +58,17 @@ const Items = () => {
                           <Item key={item._id} item={item}>
                               <div className="d-flex gap-4">
                                   <Link to={`/item/${item._id}`}>
-                                      <button className="btn btn-book">
-                                          Manage &nbsp;
-                                          <i className="fas fa-cart-plus"></i>
+                                      <button className="btn btn-manage">
+                                          Update &nbsp;
+                                          <i className="fas fa-angle-right"></i>
                                       </button>
                                   </Link>
                                   <button
                                       onClick={() => handleDelete(item._id)}
-                                      className="btn btn-book"
+                                      className="btn btn-manage"
                                   >
                                       Delete &nbsp;
-                                      <i className="fas fa-cart-plus"></i>
+                                      <i className="far fa-trash-alt"></i>
                                   </button>
                               </div>
                           </Item>
@@ -71,14 +76,23 @@ const Items = () => {
                     : items.map((item) => (
                           <Item key={item._id} item={item}>
                               <Link to={`/item/${item._id}`}>
-                                  <button className="btn btn-book">
-                                      Manage &nbsp;
-                                      <i className="fas fa-cart-plus"></i>
+                                  <button className="btn btn-manage text-center">
+                                      Update &nbsp;
+                                      <i className="fas fa-angle-right"></i>
                                   </button>
                               </Link>
                           </Item>
                       ))}
             </div>
+            {location.pathname === "/" || location.pathname === "/home" ? (
+                <Link to="/manage">
+                    <button className="btn btn-manage ">
+                        Manage Inventories &nbsp;
+                    </button>
+                </Link>
+            ) : (
+                ""
+            )}
         </div>
     );
 };

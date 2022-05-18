@@ -1,0 +1,11 @@
+.google {
+    background: transparent;
+    color: white;
+    border: 2px solid #dfe2e9;
+}
+
+.google:hover {
+    color: rgb(255, 247, 230);
+    text-shadow: 0px 0px 8px rgb(254, 252, 249);
+    box-shadow: 0px 0px 5px rgb(237, 232, 222);
+}

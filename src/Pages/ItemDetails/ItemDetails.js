@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 // import useItemDetails from "../../hooks/useItemDetails";
 import "./ItemDetails.css";
 
@@ -22,29 +22,32 @@ const ItemDetails = () => {
     }, []);
 
     const handleRestock = (quantity) => {
-        const updatedQuantity =
-            parseInt(quantity) + parseInt(quantityRef.current.value);
+        if (quantityRef.current.value) {
+            const updatedQuantity =
+                parseInt(quantity) + parseInt(quantityRef.current.value);
 
-        const newQuantity = { updatedQuantity };
+            const newQuantity = { updatedQuantity };
 
-        fetch(`http://localhost:5000/item/${itemId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newQuantity),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.modifiedCount > 0) {
-                    const remaining = item.filter(
-                        (item) => item._id !== itemId
-                    );
-                    setItem(remaining);
-                    // item.quantity = updatedQuantity;
-                    toast("Restocked successfully", { type: "success" });
-                }
-            });
+            fetch(`http://localhost:5000/item/${itemId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newQuantity),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.modifiedCount > 0) {
+                        const updatedItem = {
+                            ...item,
+                            quantity: updatedQuantity,
+                        };
+                        setItem(updatedItem);
+                        quantityRef.current.value = "";
+                        toast("Restocked successfully", { type: "default" });
+                    }
+                });
+        }
     };
 
     const handleDelivered = (quantity) => {
@@ -62,6 +65,8 @@ const ItemDetails = () => {
             .then((res) => res.json())
             .then((data) => {
                 if (data.modifiedCount > 0) {
+                    const updatedItem = { ...item, quantity: updatedQuantity };
+                    setItem(updatedItem);
                     toast("Delivered successfully", { type: "success" });
                 }
             });
@@ -71,8 +76,6 @@ const ItemDetails = () => {
         return <div>Loading...</div>;
     }
 
-    const { name, description, price, img, quantity, supplier } = item;
-
     return (
         <div className="page px-lg-5">
             <div className="item-details mt-3 mt-lg-5">
@@ -80,16 +83,18 @@ const ItemDetails = () => {
                     <div className="col col-md-2 text-center">
                         <img
                             className="p-2 border border-secondary rounded"
-                            src={img}
+                            src={item.img}
                             alt=""
                         />
                     </div>
                     <div className="col col-md-10 text-start ps-lg-5">
                         <h3 className="fw-bold">
-                            <span className="title-detail">{name}</span>
+                            <span className="title-detail">{item.name}</span>
                         </h3>
                         <p className="fw-lighter my-4">
-                            <span className="text-detail">{description}</span>
+                            <span className="text-detail">
+                                {item.description}
+                            </span>
                         </p>
 
                         <div className="item-detail-contact d-flex flex-wrap justify-content-between align-items-center">
@@ -97,15 +102,36 @@ const ItemDetails = () => {
                                 <p>
                                     <i className="fa-solid fa-badge-dollar"></i>
                                     &nbsp;
-                                    <span className="text-detail">{price}</span>
+                                    <span className="text-detail">
+                                        Price: $ {item.price}
+                                    </span>
                                 </p>
                                 <p>
                                     <span className="text-detail">
-                                        Quantity: {quantity}
+                                        Quantity: {item.quantity}
+                                    </span>
+                                </p>
+                                <input
+                                    ref={quantityRef}
+                                    type="number"
+                                    min={0}
+                                />
+                                <br />
+                                <button
+                                    className="btn btn-manage my-3"
+                                    onClick={() => handleRestock(item.quantity)}
+                                >
+                                    Restock
+                                </button>
+                                <p>
+                                    <i className="fa-solid fa-car-mirrors"></i>
+                                    &nbsp;
+                                    <span className="text-detail">
+                                        Supplier: {item.supplier}
                                     </span>
                                 </p>
                             </div>
-                            <div>
+                            {/* <div>
                                 <p>
                                     <i className="fa-solid fa-car-mirrors"></i>
                                     &nbsp;
@@ -113,22 +139,33 @@ const ItemDetails = () => {
                                         Supplier: {supplier}
                                     </span>
                                 </p>
+                            </div> */}
+                            <div className="">
+                                <button
+                                    className="btn btn-manage"
+                                    onClick={() =>
+                                        handleDelivered(item.quantity)
+                                    }
+                                >
+                                    Delivered &nbsp;
+                                    <i className="fas fa-check"></i>
+                                </button>
                             </div>
-                            <input ref={quantityRef} type="number" min={0} />
-                            <button
-                                onClick={() => handleRestock(item.quantity)}
-                            >
-                                Restock
-                            </button>
-                            <button
-                                onClick={() => handleDelivered(item.quantity)}
-                            >
-                                Delivered
-                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     );
 };

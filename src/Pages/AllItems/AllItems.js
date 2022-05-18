@@ -3,7 +3,7 @@ import Items from "../Home/Items/Items";
 
 const AllItems = () => {
     return (
-        <div>
+        <div style={{ paddingBottom: "200px" }}>
             <Items></Items>
         </div>
     );

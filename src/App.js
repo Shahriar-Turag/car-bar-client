@@ -6,7 +6,7 @@ import AddItems from "./Pages/AddItems/AddItems";
 import AllItems from "./Pages/AllItems/AllItems";
 import Home from "./Pages/Home/Home/Home";
 import ItemDetails from "./Pages/ItemDetails/ItemDetails";
-
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./Pages/Login/Login/Login";
 import Register from "./Pages/Login/Register/Register";
 import RequireAuth from "./Pages/Login/RequireAuth/RequireAuth";
@@ -61,7 +61,17 @@ function App() {
                 ></Route>
             </Routes>
             <Footer />
-            <ToastContainer />
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     );
 }

@@ -28,7 +28,16 @@
 }
 
 .title-detail {
-    color: rgb(230, 150, 47);
+    color: white;
+}
+input {
+    color: #fff;
+    width: 300px;
+
+    padding: 5px 20px;
+    border-radius: 5px;
+    background: rgb(37, 37, 37);
+    border: 1px solid grey;
 }
 
 @media only screen and (max-width: 688px) {

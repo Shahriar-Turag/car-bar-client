@@ -48,26 +48,28 @@ const MyItems = () => {
         }
     };
     return (
-        <div className="container mx-auto row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5">
-            {items.map((item) => (
-                <Item key={item._id} item={item}>
-                    <div className="d-flex gap-4">
-                        <Link to={`/item/${item._id}`}>
-                            <button className="btn btn-book">
-                                Manage &nbsp;
+        <div style={{ paddingBottom: "200px" }}>
+            <div className="container mx-auto row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5">
+                {items.map((item) => (
+                    <Item key={item._id} item={item}>
+                        <div className="d-flex gap-4">
+                            <Link to={`/item/${item._id}`}>
+                                <button className="btn btn-manage">
+                                    Manage &nbsp;
+                                    <i className="fas fa-cart-plus"></i>
+                                </button>
+                            </Link>
+                            <button
+                                onClick={() => handleDelete(item._id)}
+                                className="btn btn-manage"
+                            >
+                                Delete &nbsp;
                                 <i className="fas fa-cart-plus"></i>
                             </button>
-                        </Link>
-                        <button
-                            onClick={() => handleDelete(item._id)}
-                            className="btn btn-book"
-                        >
-                            Delete &nbsp;
-                            <i className="fas fa-cart-plus"></i>
-                        </button>
-                    </div>
-                </Item>
-            ))}
+                        </div>
+                    </Item>
+                ))}
+            </div>
         </div>
     );
 };

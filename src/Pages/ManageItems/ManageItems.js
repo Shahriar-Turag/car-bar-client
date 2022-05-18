@@ -4,7 +4,7 @@ import Items from "../Home/Items/Items";
 
 const ManageItems = () => {
     return (
-        <div>
+        <div style={{ paddingBottom: "200px" }}>
             <Items />
         </div>
     );

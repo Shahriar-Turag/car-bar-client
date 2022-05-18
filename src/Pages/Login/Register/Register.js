@@ -46,8 +46,10 @@ const Register = () => {
     };
 
     return (
-        <div className="register-form">
-            <h2 style={{ textAlign: "center" }}>Please Register</h2>
+        <div className="register-form" style={{ paddingBottom: "100px" }}>
+            <h2 className="py-4" style={{ textAlign: "center" }}>
+                PLEASE REGISTER
+            </h2>
             <form onSubmit={handleRegister}>
                 <input type="text" name="name" id="" placeholder="Your Name" />
 
@@ -72,16 +74,17 @@ const Register = () => {
                     name="terms"
                     id="terms"
                 />
-                {/* <label className={agree ? 'ps-2': 'ps-2 text-danger'} htmlFor="terms">Accept Genius Car Terms and Conditions</label> */}
+
                 <label
-                    className={`ps-2 ${agree ? "" : "text-danger"}`}
+                    className={`ps-2 ${agree ? "" : "text-warning"}`}
                     htmlFor="terms"
                 >
-                    Accept Genius Car Terms and Conditions
+                    Accept CAR BAR Terms and Conditions
                 </label>
                 <input
                     disabled={!agree}
-                    className="w-50 mx-auto btn btn-primary mt-2"
+                    className="w-50 mx-auto btn login mt-2"
+                    w
                     type="submit"
                     value="Register"
                 />
@@ -90,7 +93,7 @@ const Register = () => {
                 Already have an account?{" "}
                 <Link
                     to="/login"
-                    className="text-primary pe-auto text-decoration-none"
+                    className="text-warning pe-auto text-decoration-none"
                     onClick={navigateLogin}
                 >
                     Please Login
