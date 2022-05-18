@@ -47,4 +47,7 @@
     .home-subscribe input:focus {
         width: 90%;
     }
+    .sub {
+        margin-bottom: 250px;
+    }
 }

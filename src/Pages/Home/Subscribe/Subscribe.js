@@ -3,7 +3,10 @@ import "./Subscribe.css";
 
 const Subscribe = () => {
     return (
-        <div className="home-subscribe container-fluid text-center pb-5">
+        <div
+            className="home-subscribe container-fluid text-center pb-5 sub"
+            style={{ paddingTop: "150px" }}
+        >
             <div className="mb-5">
                 <h2>
                     FOR <span className="text-warning">NEWS</span> AND{" "}

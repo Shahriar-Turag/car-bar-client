@@ -1,0 +1,9 @@
+.allItems {
+    padding-bottom: 200px;
+}
+
+@media only screen and (max-width: 688px) {
+    .allItems {
+        padding-bottom: 450px;
+    }
+}

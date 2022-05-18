@@ -1,11 +1,13 @@
 import React from "react";
-
+import "./ManageItems.css";
 import Items from "../Home/Items/Items";
 
 const ManageItems = () => {
     return (
-        <div style={{ paddingBottom: "200px" }}>
-            <Items />
+        <div className="manage">
+            <div>
+                <Items />
+            </div>
         </div>
     );
 };

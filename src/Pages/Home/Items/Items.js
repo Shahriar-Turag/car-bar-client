@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Item from "../Item/Item";
@@ -6,13 +5,30 @@ import "./Items.css";
 
 const Items = () => {
     const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
     const location = useLocation();
 
     useEffect(() => {
+        setLoading(true);
         fetch("http://localhost:5000/item")
             .then((res) => res.json())
-            .then((data) => setItems(data));
+            .then((data) => {
+                setItems(data);
+                setLoading(false);
+            });
     }, []);
+    if (loading) {
+        return (
+            <div className="page text-center">
+                <div
+                    className="spinner-grow text-primary m-5 text-center"
+                    role="status"
+                >
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        );
+    }
 
     const handleDelete = (id) => {
         const proceed = window.confirm(

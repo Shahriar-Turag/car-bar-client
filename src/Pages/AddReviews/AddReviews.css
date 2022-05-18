@@ -1,27 +1,34 @@
-.add-item {
+.add-review {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url("https://i.ibb.co/fD4xxM8/wallpaperflare-com-wallpaper.jpg")
+    background: url("https://i.ibb.co/YRM08xq/ford-mustang-gt-for-velgen-wheels3-2560x1440.jpg")
         no-repeat center fixed;
     background-color: rgba(0, 0, 0, 0.6);
     background-blend-mode: multiply;
     background-size: cover;
 }
-.add-item-box {
+
+.add-review-box {
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 7px;
 }
-.add-item-box form {
+
+.add-review-box h4 {
+    color: rgb(250, 179, 47);
+}
+
+.add-review-box form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.add-item-box form input,
+.add-review-box form input,
 textarea {
+    text-align: center;
     color: #fff;
     width: 300px;
     margin: 10px;
@@ -31,7 +38,7 @@ textarea {
     border: 1px solid grey;
 }
 
-.add-item-box form input:focus {
+.add-review-box form input:focus {
     color: #fff;
     width: 300px;
     margin: 10px;
@@ -42,16 +49,15 @@ textarea {
     outline: 0;
 }
 
-.add-item-box form input[type="submit"] {
+.add-review-box form input[type="submit"] {
     width: auto;
     color: #fff;
     padding: 5px 15px;
     background-color: rgb(223, 152, 0);
-    border: 1px solid rgb(255, 255, 255);
     border-radius: 5px;
 }
 
-.add-item-box form input[type="submit"]:hover {
+.add-review-box form input[type="submit"]:hover {
     background: transparent;
     border: 1px solid rgb(255, 174, 0);
     text-shadow: 0px 0px 5px rgb(255, 174, 0);

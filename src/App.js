@@ -14,6 +14,7 @@ import ManageItems from "./Pages/ManageItems/ManageItems";
 import MyItems from "./Pages/MyItems/MyItems";
 import Footer from "./Pages/Shared/Footer/Footer";
 import Header from "./Pages/Shared/Header/Header";
+import AddReviews from "./Pages/AddReviews/AddReviews";
 
 function App() {
     return (
@@ -48,6 +49,14 @@ function App() {
                     element={
                         <RequireAuth>
                             <AddItems />
+                        </RequireAuth>
+                    }
+                ></Route>
+                <Route
+                    path="/reviews"
+                    element={
+                        <RequireAuth>
+                            <AddReviews />
                         </RequireAuth>
                     }
                 ></Route>

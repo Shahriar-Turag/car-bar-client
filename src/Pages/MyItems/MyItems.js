@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
-
+import "./MyItems.css";
 import auth from "../../firebase.init";
 import Item from "../Home/Item/Item";
 
@@ -48,7 +48,7 @@ const MyItems = () => {
         }
     };
     return (
-        <div style={{ paddingBottom: "200px" }}>
+        <div className="myItems">
             <div className="container mx-auto row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5">
                 {items.map((item) => (
                     <Item key={item._id} item={item}>

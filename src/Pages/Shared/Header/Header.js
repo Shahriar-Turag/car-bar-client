@@ -2,8 +2,9 @@ import { signOut } from "firebase/auth";
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import auth from "../../../firebase.init";
+import "./Header.css";
 
 const Header = () => {
     const [user] = useAuthState(auth);
@@ -25,34 +26,80 @@ const Header = () => {
                         <h2>
                             CAR <span className="text-warning">BAR</span>
                         </h2>
-                        {/* <img height={30} src={logo} alt="" /> */}
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto"></Nav>
                         <Nav>
-                            <Nav.Link as={Link} to="/">
+                            <Nav.Link
+                                as={NavLink}
+                                to="/"
+                                className={({ isActive }) =>
+                                    isActive ? "active" : ""
+                                }
+                            >
                                 Home
                             </Nav.Link>
-                            <Nav.Link as={Link} to="inventory">
+                            <Nav.Link
+                                as={NavLink}
+                                to="inventory"
+                                className={({ isActive }) =>
+                                    isActive ? "active" : ""
+                                }
+                            >
                                 Inventory
                             </Nav.Link>
                             {user && (
-                                <Nav.Link as={Link} to="add">
+                                <Nav.Link
+                                    as={NavLink}
+                                    to="add"
+                                    className={({ isActive }) =>
+                                        isActive ? "active" : ""
+                                    }
+                                >
                                     Add Items
+                                </Nav.Link>
+                            )}
+                            {user && (
+                                <Nav.Link
+                                    as={NavLink}
+                                    to="reviews"
+                                    className={({ isActive }) =>
+                                        isActive ? "active" : ""
+                                    }
+                                >
+                                    Reviews
                                 </Nav.Link>
                             )}
 
                             {user && (
-                                <Nav.Link as={Link} to="manage">
+                                <Nav.Link
+                                    as={NavLink}
+                                    to="manage"
+                                    className={({ isActive }) =>
+                                        isActive ? "active" : ""
+                                    }
+                                >
                                     Manage Items
                                 </Nav.Link>
                             )}
-                            <Nav.Link as={Link} to="about">
+                            <Nav.Link
+                                as={NavLink}
+                                to="about"
+                                className={({ isActive }) =>
+                                    isActive ? "active" : ""
+                                }
+                            >
                                 About
                             </Nav.Link>
                             {user && (
-                                <Nav.Link as={Link} to="myItems">
+                                <Nav.Link
+                                    as={NavLink}
+                                    to="myItems"
+                                    className={({ isActive }) =>
+                                        isActive ? "active" : ""
+                                    }
+                                >
                                     My Items
                                 </Nav.Link>
                             )}

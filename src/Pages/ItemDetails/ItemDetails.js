@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 // import useItemDetails from "../../hooks/useItemDetails";
 import "./ItemDetails.css";
@@ -77,8 +77,8 @@ const ItemDetails = () => {
     }
 
     return (
-        <div className="page px-lg-5">
-            <div className="item-details mt-3 mt-lg-5">
+        <div className="page px-lg-5 text-center">
+            <div className="item-details mt-3 mt-lg-5 mb-4">
                 <div className="row align-items-center">
                     <div className="col col-md-2 text-center">
                         <img
@@ -131,18 +131,10 @@ const ItemDetails = () => {
                                     </span>
                                 </p>
                             </div>
-                            {/* <div>
-                                <p>
-                                    <i className="fa-solid fa-car-mirrors"></i>
-                                    &nbsp;
-                                    <span className="text-detail">
-                                        Supplier: {supplier}
-                                    </span>
-                                </p>
-                            </div> */}
+
                             <div className="">
                                 <button
-                                    className="btn btn-manage"
+                                    className="btn btn-manage "
                                     onClick={() =>
                                         handleDelivered(item.quantity)
                                     }
@@ -155,6 +147,7 @@ const ItemDetails = () => {
                     </div>
                 </div>
             </div>
+
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -166,6 +159,11 @@ const ItemDetails = () => {
                 draggable
                 pauseOnHover
             />
+            <Link to="/manage">
+                <button className=" btn btn-manage">
+                    Manage Inventories &nbsp;
+                </button>
+            </Link>
         </div>
     );
 };
