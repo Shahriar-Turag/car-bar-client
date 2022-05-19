@@ -1,34 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./MyItems.css";
 import auth from "../../firebase.init";
 import Item from "../Home/Item/Item";
+import { signOut } from "firebase/auth";
 
 const MyItems = () => {
     const [user] = useAuthState(auth);
     const [items, setItems] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const author = { author: user?.email };
         const url = "http://localhost:5000/myItems";
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(author),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data[0]) {
-                    setItems(data);
-                    console.log(data);
-                } else {
-                    alert("No items found");
-                }
-            });
-    }, [user.email]);
+        try {
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+                body: JSON.stringify(author),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data[0]) {
+                        console.log(data);
+                    } else {
+                        alert("No items found");
+                    }
+                });
+        } catch (error) {
+            console.log(error.message);
+            if (
+                error.response.status === 403 ||
+                error.response.status === 401
+            ) {
+                signOut(auth);
+                navigate("/login");
+            }
+        }
+    }, [user]);
 
     const handleDelete = (id) => {
         const proceed = window.confirm(

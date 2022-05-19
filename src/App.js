@@ -15,6 +15,8 @@ import MyItems from "./Pages/MyItems/MyItems";
 import Footer from "./Pages/Shared/Footer/Footer";
 import Header from "./Pages/Shared/Header/Header";
 import AddReviews from "./Pages/AddReviews/AddReviews";
+import BlogPage from "./Pages/BlogPage/BlogPage";
+import NotFound from "./Pages/Shared/NotFound/NotFound";
 
 function App() {
     return (
@@ -27,6 +29,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/inventory" element={<AllItems />} />
+                <Route path="/blogs" element={<BlogPage />} />
+                <Route path="*" element={<NotFound />} />
 
                 <Route
                     path="/item/:itemId"

@@ -85,6 +85,15 @@ const Header = () => {
                             )}
                             <Nav.Link
                                 as={NavLink}
+                                to="blogs"
+                                className={({ isActive }) =>
+                                    isActive ? "active" : ""
+                                }
+                            >
+                                Blogs
+                            </Nav.Link>
+                            <Nav.Link
+                                as={NavLink}
                                 to="about"
                                 className={({ isActive }) =>
                                     isActive ? "active" : ""
