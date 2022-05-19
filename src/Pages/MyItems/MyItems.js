@@ -5,6 +5,7 @@ import "./MyItems.css";
 import auth from "../../firebase.init";
 import Item from "../Home/Item/Item";
 import { signOut } from "firebase/auth";
+import axiosPrivate from "../../api/axiosPrivate";
 
 const MyItems = () => {
     const [user] = useAuthState(auth);
@@ -12,37 +13,24 @@ const MyItems = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const author = { author: user?.email };
-        const url = "http://localhost:5000/myItems";
-        try {
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${localStorage.getItem(
-                        "accessToken"
-                    )}`,
-                },
-                body: JSON.stringify(author),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    if (data[0]) {
-                        console.log(data);
-                    } else {
-                        alert("No items found");
-                    }
-                });
-        } catch (error) {
-            console.log(error.message);
-            if (
-                error.response.status === 403 ||
-                error.response.status === 401
-            ) {
-                signOut(auth);
-                navigate("/login");
+        const getItems = async () => {
+            const author = { author: user?.email };
+            const url = "http://localhost:5000/myItems";
+            try {
+                const { data } = await axiosPrivate.post(url, author);
+                setItems(data);
+            } catch (error) {
+                console.log(error);
+                if (
+                    error.response.status === 401 ||
+                    error.response.status === 403
+                ) {
+                    signOut(auth);
+                    navigate("/login");
+                }
             }
-        }
+        };
+        getItems();
     }, [user]);
 
     const handleDelete = (id) => {
@@ -64,7 +52,7 @@ const MyItems = () => {
     };
     return (
         <div className="myItems">
-            <div className="container mx-auto row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5">
+            <div className="container mx-auto row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5 text-center">
                 {items.map((item) => (
                     <Item key={item._id} item={item}>
                         <div className="d-flex gap-4">
