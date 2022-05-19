@@ -14,10 +14,10 @@ const MyItems = () => {
 
     useEffect(() => {
         const getItems = async () => {
-            const author = { author: user?.email };
-            const url = "http://localhost:5000/myItems";
+            const email = { email: user?.email };
+            const url = "https://hidden-forest-40696.herokuapp.com/myItems";
             try {
-                const { data } = await axiosPrivate.post(url, author);
+                const { data } = await axiosPrivate.post(url, email);
                 setItems(data);
             } catch (error) {
                 console.log(error);
@@ -31,14 +31,14 @@ const MyItems = () => {
             }
         };
         getItems();
-    }, [user]);
+    }, [user.email]);
 
     const handleDelete = (id) => {
         const proceed = window.confirm(
             "Are you sure you want to delete this service?"
         );
         if (proceed) {
-            const url = `http://localhost:5000/item/${id}`;
+            const url = `https://hidden-forest-40696.herokuapp.com/item/${id}`;
             fetch(url, {
                 method: "DELETE",
             })

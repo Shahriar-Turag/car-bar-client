@@ -10,7 +10,7 @@ const Items = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch("http://localhost:5000/item")
+        fetch("https://hidden-forest-40696.herokuapp.com/item")
             .then((res) => res.json())
             .then((data) => {
                 setItems(data);
@@ -35,7 +35,7 @@ const Items = () => {
             "Are you sure you want to delete this service?"
         );
         if (proceed) {
-            const url = `http://localhost:5000/item/${id}`;
+            const url = `https://hidden-forest-40696.herokuapp.com/item/${id}`;
             fetch(url, {
                 method: "DELETE",
             })

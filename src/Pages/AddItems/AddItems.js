@@ -12,12 +12,14 @@ const AddItems = () => {
     const onSubmit = (data) => {
         data.email = user?.email;
 
-        axios.post("http://localhost:5000/item", data).then((res) => {
-            if (res.data.insertedId) {
-                alert("Item added Successfully...!");
-                reset();
-            }
-        });
+        axios
+            .post("https://hidden-forest-40696.herokuapp.com/item", data)
+            .then((res) => {
+                if (res.data.insertedId) {
+                    alert("Item added Successfully...!");
+                    reset();
+                }
+            });
     };
 
     return (

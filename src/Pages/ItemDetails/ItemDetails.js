@@ -12,7 +12,7 @@ const ItemDetails = () => {
 
     useEffect(() => {
         setLoading(true);
-        const url = `http://localhost:5000/item/${itemId}`;
+        const url = `https://hidden-forest-40696.herokuapp.com/item/${itemId}`;
         fetch(url)
             .then((res) => res.json())
             .then((data) => {
@@ -28,7 +28,7 @@ const ItemDetails = () => {
 
             const newQuantity = { updatedQuantity };
 
-            fetch(`http://localhost:5000/item/${itemId}`, {
+            fetch(`https://hidden-forest-40696.herokuapp.com/item/${itemId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const ItemDetails = () => {
 
         const newQuantity = { updatedQuantity };
 
-        fetch(`http://localhost:5000/item/${itemId}`, {
+        fetch(`https://hidden-forest-40696.herokuapp.com/item/${itemId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
