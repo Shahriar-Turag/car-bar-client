@@ -14,11 +14,12 @@ const MyItems = () => {
 
     useEffect(() => {
         const getItems = async () => {
-            const email = { email: user?.email };
-            const url = "https://hidden-forest-40696.herokuapp.com/myItems";
+            const author = { author: user?.email };
+            const url = " https://hidden-forest-40696.herokuapp.com/myItems";
             try {
-                const { data } = await axiosPrivate.post(url, email);
+                const { data } = await axiosPrivate.post(url, author);
                 setItems(data);
+                console.log(data);
             } catch (error) {
                 console.log(error);
                 if (
@@ -29,13 +30,15 @@ const MyItems = () => {
                     navigate("/login");
                 }
             }
+            // console.log(author);
         };
         getItems();
-    }, [user.email]);
+    }, []);
+    // console.log(items);
 
     const handleDelete = (id) => {
         const proceed = window.confirm(
-            "Are you sure you want to delete this service?"
+            "Are you sure you want to delete this item?"
         );
         if (proceed) {
             const url = `https://hidden-forest-40696.herokuapp.com/item/${id}`;

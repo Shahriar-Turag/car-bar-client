@@ -72,10 +72,6 @@ const ItemDetails = () => {
             });
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
     return (
         <div className="page px-lg-5 text-center">
             <div className="item-details mt-3 mt-lg-5 mb-4">
@@ -96,6 +92,9 @@ const ItemDetails = () => {
                                 {item.description}
                             </span>
                         </p>
+                        <p className="fw-lighter my-4">
+                            <span className="text-detail">ID: {item._id}</span>
+                        </p>
 
                         <div className="item-detail-contact d-flex flex-wrap justify-content-between align-items-center">
                             <div>
@@ -103,13 +102,19 @@ const ItemDetails = () => {
                                     <i className="fa-solid fa-badge-dollar"></i>
                                     &nbsp;
                                     <span className="text-detail">
-                                        Price: $ {item.price}
+                                        Price: ${item.price}
                                     </span>
                                 </p>
                                 <p>
-                                    <span className="text-detail">
-                                        Quantity: {item.quantity}
-                                    </span>
+                                    {item.quantity < 1 ? (
+                                        <span className="text-danger">
+                                            Sold
+                                        </span>
+                                    ) : (
+                                        <span className="text-detail">
+                                            Quantity: {item.quantity}
+                                        </span>
+                                    )}
                                 </p>
                                 <input
                                     ref={quantityRef}

@@ -32,7 +32,7 @@ const Items = () => {
 
     const handleDelete = (id) => {
         const proceed = window.confirm(
-            "Are you sure you want to delete this service?"
+            "Are you sure you want to delete this item?"
         );
         if (proceed) {
             const url = `https://hidden-forest-40696.herokuapp.com/item/${id}`;
@@ -50,9 +50,15 @@ const Items = () => {
 
     return (
         <div className="container  text-center p-3 p-lg-5 mx-lg-auto">
-            <h2 className="fw-bold">
-                FEATURED <span className="text-warning">ITEMS</span>
-            </h2>
+            {location.pathname === "/" ? (
+                <h2 className="fw-bold">
+                    FEATURED <span className="text-warning">ITEMS</span>{" "}
+                </h2>
+            ) : (
+                <h2 className="fw-bold">
+                    ALL <span className="text-warning">ITEMS</span>
+                </h2>
+            )}
 
             <div
                 className="row row-cols-1 row-cols-md-3 g-4 g-lg-5 py-5"
